@@ -1,16 +1,28 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net"
 	"os"
 )
 
+var serverAddr string
+
+func init() {
+	flag.StringVar(&serverAddr, "server-addr", "", "The remote server address")
+	flag.Parse()
+
+	if serverAddr == "" {
+		log.Fatal("Server addr must be set")
+	}
+}
+
 func main() {
 
 	// get youtube url
-	args := os.Args[1:]
+	args := flag.Args()
 
 	if len(args) == 0 {
 		log.Fatal("Need a youtube url in args")
@@ -30,7 +42,7 @@ func main() {
 func SendVideo(url string) error {
 
 	// connect to this socket
-	conn, _ := net.Dial("tcp", "127.0.0.1:32401")
+	conn, _ := net.Dial("tcp", serverAddr)
 	for {
 		// fmt.Print("Text to send: ")
 		// text, _ := reader.ReadString('\n')
