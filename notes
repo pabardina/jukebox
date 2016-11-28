@@ -6,7 +6,6 @@ serveur :
         - current song
         - stop...
 - rejouer next / previous
-- display barre de progression sur la durée de la chanson https://github.com/gizak/termui
 - console coloré !!
 
 client :
